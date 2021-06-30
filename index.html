@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Song API</h2>
+
+<p>Click the button to get a random json record from an API source</p>
+
+<button onclick="getAPIJsonRecs()">Try It</button>
+
+<p id="myAPIDemo"></p>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+
+const options = {
+  method: 'GET',
+  url: 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random',
+  headers: {
+    accept: 'application/json',
+    'x-rapidapi-key': '574b3f9524mshd048c26c3e74e09p1d64b8jsn04c3a4698f58',
+    'x-rapidapi-host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+  }
+};
+
+const x = document.getElementById("myAPIDemo");
+
+const getAPIJsonRecs = async () => {
+    try {
+        const response = await axios.request(options);
+        console.log(response.data);
+        x.innerHTML = response.data.value;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+//getAPIJsonRecs()
+
+function getPosition() {
+  try {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } catch {
+    x.innerHTML = err;
+  }
+}
+
+// If you find or use a location or GPS API source
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+
+</script>
+
+</body>
+</html>
+
+
